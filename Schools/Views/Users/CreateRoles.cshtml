@@ -1,0 +1,58 @@
+﻿@model Roles
+@{
+    ViewData["Title"] = "CreateRoles";
+}
+
+<form method="post">
+    <div class="border p-3 mt-4 row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row pb-2">
+            <h2 class="text-primary">
+                Create Roles
+            </h2>
+            <hr />
+            <div class="mb-3 col-6">
+                <label asp-for="RolesName">Role Name</label>
+                <select class="form-select" name="RolesName">
+                    <option disabled selected>-- Role --</option>
+                    <option>Proprietor</option>
+                    <option>Teacher</option>
+                    <option>Others</option>
+                </select>
+               
+                <span asp-validation-for="RolesName" class="text-danger"></span>
+            </div>
+            
+            <div class="mb-3 col-6">
+                <label asp-for="Username">Username</label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3 col-6">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3 col-6">
+                <label asp-for="UsersId">User</label>
+                <select asp-for="UsersId" class="form-select" asp-items="@(new SelectList(ViewBag.Users, "UsersId","FullName"))">
+                    <option disabled selected>-- Select User --</option>
+                </select>
+                <span asp-validation-for="UsersId" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+                <a asp-controller="Users" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                    Back to Roles
+                </a>
+            </div>
+           
+        </div>
+    </div>
+
+</form>
+
+
+

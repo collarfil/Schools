@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Student>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Student</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Student" asp-action="CreateStudent" class="btn btn-primary" style="width:250px">
+                Create New Student
+            </a>
+        </div>
+    </div>
+</div>
+<table class="table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+                <th>Number</th>
+                <th>Student Name</th>
+                <th>Class</th>
+                <th>Phone Number</th>
+                <th>Parent Name</th>
+                <th>Parent Phone</th>
+                
+                <th><label>Action</label></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            <tr>
+                
+                <td width="50">
+                    @obj.StudentNo
+                </td>
+                    <td width="50">
+                        @obj.FullName
+                    </td>
+                    <td width="50">
+                        @obj.ClassId
+                    </td>
+                    <td width="50">
+                    @obj.Phone
+                </td>
+                    <td width="50">
+                        @obj.ParentName
+                    </td>
+                    <td width="50">
+                        @obj.ParentPhone
+                    </td>
+                    <td width="50">
+                        <a asp-controller="Studnet" asp-action="EditStudent" asp-route-id="@obj.StudentId" class="btn btn-success btn-mini"><i class="fas fa-edit"> Edit</i></a>
+                        <a asp-controller="Student" asp-action="DeleteStudent" asp-route-id="@obj.StudentId" class="btn btn-danger btn-mini"><i class="fas fa-trash-alt"> Delete</i></a>
+                    </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

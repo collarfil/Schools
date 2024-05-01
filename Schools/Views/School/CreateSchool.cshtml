@@ -1,0 +1,52 @@
+﻿@model School
+@{
+    ViewData["Title"] = "CreateSchool";
+}
+
+<form method="post">
+    <div class="border p-3 mt-4 row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row pb-2">
+            <h2 class="text-primary">
+                Create School
+            </h2>
+            <hr />
+            <div class="mb-3 col-6">
+                <label asp-for="SchoolsName">School Name</label>
+                <input asp-for="SchoolsName" class="form-control" />
+                <span asp-validation-for="SchoolsName" class="text-danger"></span>
+            </div>
+            <div class="mb-3 col-6">
+                <label asp-for="Address">Address </label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="mb-3 col-6">
+                <label asp-for="Phone">Phone Number</label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="mb-3 col-6">
+                <label asp-for="Email">Email Address</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Logo">Email Address</label>
+                <input asp-for="Logo" class="form-control" type="file" name="logo" />
+                <span asp-validation-for="Logo" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+                <a asp-controller="School" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                    Back to School
+                </a>
+            </div>
+           
+        </div>
+    </div>
+
+</form>
+
+
+

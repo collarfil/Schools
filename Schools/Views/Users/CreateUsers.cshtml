@@ -1,0 +1,52 @@
+﻿@model Users
+@{
+    ViewData["Title"] = "CreateUsers";
+}
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row pb-2">
+            <h2 class="text-primary">
+                Create User
+            </h2>
+            <hr />
+            <div class="mb-3">
+                <label asp-for="SchoolsId">School</label>
+                <select asp-for="SchoolsId" class="form-select" asp-items="@(new SelectList(ViewBag.School, "SchoolsId","SchoolsName"))">
+                    <option value="disabled selected">-- School --</option>
+                </select>
+                <span asp-validation-for="SchoolsId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="FullName">Full Name</label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Address">Address</label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Phone">Phone Number</label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+                <a asp-controller="Users" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                    Back to Users
+                </a>
+            </div>
+            
+        </div>
+    </div>
+
+</form>
+
+
+

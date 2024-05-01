@@ -1,0 +1,39 @@
+﻿@model Class
+@{
+    ViewData["Title"] = "CreateClass";
+}
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row pb-2">
+            <h2 class="text-primary">
+                Create Account
+            </h2>
+            <hr />
+            <div class="mb-3">
+                <label asp-for="SectionId">Section</label>
+                <select asp-for="SectionId" class="form-select" asp-items="@(new SelectList(ViewBag.Section,"SectionId","SectionName"))">
+                    <option value="disabled selected">Section</option>
+                </select>
+                <span asp-validation-for="SectionId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ClassName">Class Name</label>
+                <input asp-for="ClassName" class="form-control" />
+                <span asp-validation-for="ClassName" class="text-danger"></span>
+            </div>
+           
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+                <a asp-controller="Class asp-action="Index" class="btn btn-secondary" style="width:150px">
+                  Back to Class
+                </a>
+            </div>
+            
+        </div>
+    </div>
+
+</form>
+
+

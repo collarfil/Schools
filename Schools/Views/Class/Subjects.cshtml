@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Subjects>
+@{
+    ViewData["Title"] = "Subjects";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Subjects</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Class" asp-action="CreateSubjects" class="btn btn-primary" style="width:250px">
+                Create New Subject
+            </a>
+        </div>
+    </div>
+</div>
+<table class="table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Subject Name</th>
+            <th>Class</th>
+            
+            <th>
+                <label>Action</label>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var obj in Model)
+        {
+            <tr>
+                <td width="100">
+                    @obj.SubjectsName
+                </td>
+                <td width="50">
+                    @obj.ClassId
+                </td>
+               
+                <td width="50" class="justify-content-end">
+
+                    <a asp-controller="Class" asp-action="EditSubjects" asp-route-id="@obj.SubjectsId" class="btn btn-success btn-mini"><i class="fas fa-edit"> Edit</i></a>
+                    <a asp-controller="Class" asp-action="DeleteSubjects" asp-route-id="@obj.SubjectsId" class="btn btn-danger btn-mini"><i class="fas fa-trash-alt"> Delete</i></a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

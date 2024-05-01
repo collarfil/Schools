@@ -1,0 +1,32 @@
+﻿@model Section
+@{
+    ViewData["Title"] = "CreateSection";
+}
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row pb-2">
+            <h2 class="text-primary">
+                Create Section
+            </h2>
+            <hr />
+            <div class="mb-3">
+                <label asp-for="SectionName">Section</label>
+                <input asp-for="SectionName" class="form-control" />
+                <span asp-validation-for="SectionName" class="text-danger"></span>
+            </div>
+
+    <div class="col-12">
+                <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+                <a asp-controller="Class" asp-action="Section" class="btn btn-secondary" style="width:150px">
+                    Back to Account
+                </a>
+    </div>
+            
+        </div>
+    </div>
+
+</form>
+
+

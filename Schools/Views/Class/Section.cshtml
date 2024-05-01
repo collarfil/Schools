@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Section>
+@{
+    ViewData["Title"] = "Section";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Section</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Class" asp-action="CreateSection" class="btn btn-primary" style="width:250px">
+                Create New Section
+            </a>
+        </div>
+    </div>
+</div>
+<table class="table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+
+            <th>Section</th>
+            <th><label>Action</label></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            <tr>
+
+                <td width="50">
+                    @obj.SectionName
+                </td>
+                <td width="50">
+                    <a asp-controller="Class" asp-action="EditSection" asp-route-id="@obj.SectionId" class="btn btn-success btn-mini"><i class="fas fa-edit"> Edit</i></a>
+                    <a asp-controller="Class" asp-action="DeleteSection" asp-route-id="@obj.SectionId" class="btn btn-danger btn-mini"><i class="fas fa-trash-alt"> Delete</i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

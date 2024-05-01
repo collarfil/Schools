@@ -1,0 +1,40 @@
+﻿@model Subjects
+@{
+    ViewData["Title"] = "CreateSubjects";
+}
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row pb-2">
+            <h2 class="text-primary">
+                Create Subject
+            </h2>
+            <hr />
+            <div class="mb-3">
+                <label asp-for="SubjectsName">Subject</label>
+                <input asp-for="SubjectsName" class="form-control" />
+                <span asp-validation-for="SubjectsName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ClassId">Class</label>
+                <select asp-for="ClassId" class="form-select" asp-items="@(new SelectList(ViewBag.Class,"ClassId","ClassName"))">
+                    <option>Select Class</option>
+                </select>
+                <span asp-validation-for="ClassId" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+                <a asp-controller="Class" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                    Back to Subject
+                </a>
+            </div>
+                       
+        </div>
+    </div>
+
+</form>
+
+
+

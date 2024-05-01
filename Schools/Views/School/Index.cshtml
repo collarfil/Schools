@@ -1,0 +1,60 @@
+﻿@model IEnumerable<School>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">School</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="School" asp-action="CreateSchool" class="btn btn-primary" style="width:250px">
+                Create New School
+            </a>
+        </div>
+    </div>
+</div>
+<table class="table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+
+            <th>School Name</th>
+            <th>Address</th>
+            <th>Phone </th>
+            <th>Email </th>
+            <th>Logo </th>
+            <th><label>Action</label></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            <tr>
+
+                <td width="120">
+                    @obj.SchoolsName
+                </td>
+                <td width="170">
+                    @obj.Address
+                </td>
+                <td width="20">
+                    @obj.Phone
+                </td>
+                <td width="20">
+                    @obj.Email
+                </td>
+                <td width="150">
+                    @obj.Logo
+                </td>
+                <td width="100">
+                    <a asp-controller="School" asp-action="EditAccountType" asp-route-id="@obj.SchoolsId" class="btn btn-success btn-mini"><i class="fas fa-edit"></i></a>
+                    <a asp-controller="School" asp-action="DeleteAccountType" asp-route-id="@obj.SchoolsId" class="btn btn-danger btn-mini"><i class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

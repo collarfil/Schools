@@ -1,0 +1,143 @@
+﻿@model ExamViewModel.ExamGridViewModel
+
+<div class="container">
+    <div class="row justify-content-center mt-3">
+
+        <h3 class="text-center text-danger"><i class="fas fa-university"> Schools</i></h3>
+
+    </div>
+</div>
+<div>
+    <label>Select Class:</label>
+    @Html.DropDownListFor(m => m.ClassId, new SelectList(Model.Classes, "ClassId", "ClassName"), "Select Class", new { @class = "form-control" })
+</div>
+
+<table id="examGrid" class="table">
+    <thead>
+        <tr>
+            
+            <th>Student</th>
+            <th>Subject</th>
+            <th>Score 1</th>
+            <th>Score 2</th>
+            <th>Score 3</th>
+            <th>Term</th>
+            <th>Session</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<button id="addRow" class="btn btn-primary">Add Row</button>
+<button id="saveExams" class="btn btn-success">Save Exams</button>
+
+@section Scripts {
+    <script>
+        var examGrid = [];
+        var students = @Html.Raw(Json.Serialize(Model.Students?.Select(s => new { Id = s.StudentId, Name = s.FullName })));
+        var subjects = @Html.Raw(Json.Serialize(Model.Subjects?.Select(s => new { Id = s.SubjectsId, Name = s.SubjectsName })));
+
+        $(function () {
+            $('#ClassId').change(function () {
+                loadGrid();
+            });
+
+            $('#addRow').click(function () {
+                addRow();
+            });
+
+            $('#saveExams').click(function () {
+                saveExams();
+            });
+
+            loadGrid();
+        });
+
+        function loadGrid() {
+            var classId = $('#ClassId').val();
+            examGrid = [];
+            $('#examGrid tbody').empty();
+
+            if (classId) {
+                addRow();
+            }
+        }
+
+        function addRow() {
+            var row = `
+                        <tr>
+                            <td>${getStudentDropdown()}</td>
+                            <td>${getSubjectDropdown()}</td>
+                            <td><input type="text" class="form-control score1" /></td>
+                            <td><input type="text" class="form-control score2" /></td>
+                            <td><input type="text" class="form-control score3" /></td>
+                            <td><input type="text" class="form-control term" /></td>
+                            <td><input type="text" class="form-control session" /></td>
+                        </tr>
+                    `;
+
+            $('#examGrid tbody').append(row);
+        }
+
+        function getStudentDropdown() {
+            var options = '<select class="form-control student">';
+            options += '<option value="">Select Student</option>';
+            $.each(students, function (index, student) {
+                options += `<option value="${student.id}">${student.name}</option>`;
+            });
+            options += '</select>';
+            return options;
+        }
+
+        function getSubjectDropdown() {
+            var options = '<select class="form-control subject">';
+            options += '<option value="">Select Subject</option>';
+            $.each(subjects, function (index, subject) {
+                options += `<option value="${subject.id}">${subject.name}</option>`;
+            });
+            options += '</select>';
+            return options;
+        }
+
+        function saveExams() {
+            var classId = $('#ClassId').val();
+            var exams = [];
+
+            $('#examGrid tbody tr').each(function () {
+                var schoolsId = $(this).find('.school').val();
+                var studentId = $(this).find('.student').val();
+                var classId = $(this).find('.class').val();
+                var subjectId = $(this).find('.subject').val();
+                var score1 = $(this).find('.score1').val();
+                var score2 = $(this).find('.score2').val();
+                var score3 = $(this).find('.score3').val();
+                var term = $(this).find('.term').val();
+                var session = $(this).find('.session').val();
+
+                exams.push({
+                    SchoolsId: schoolsId,
+                    StudentId: studentId,
+                    ClassId: classId,
+                    SubjectId: subjectId,
+                    Score1: score1,
+                    Score2: score2,
+                    Score3: score3,
+                    Term: term,
+                    Session: session
+                });
+            });
+
+            $.ajax({
+                url: '@Url.Action("CreateExams", "Exam")',
+                type: 'POST',
+                data: { classId: classId, exams: exams },
+                success: function (response) {
+                    alert('Exams saved successfully!');
+                },
+                error: function () {
+                    alert('An error occurred while saving exams.');
+                }
+            });
+        }
+    </script>
+}

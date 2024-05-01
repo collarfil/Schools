@@ -1,0 +1,66 @@
+﻿@model Student
+@{
+    ViewData["Title"] = "EditStudent";
+}
+
+<form method="post" asp-action="EditStudent">
+    <div class="border p-3 mt-4 row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row pb-2">
+            <h2 class="text-primary">
+                Update Student
+            </h2>
+            <hr />
+            <div class="mb-3 col-6">
+                <label asp-for="SchoolsId">School</label>
+                <select asp-for="SchoolsId" class="form-select" asp-items="@(new SelectList(ViewBag.School,"SchoolsId","SchoolsName"))">
+                    <option disabled selected>-- School --</option>
+                </select>
+
+                <span asp-validation-for="SchoolsId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3  col-6">
+                <label asp-for="StudentNo">Student Number</label>
+                <input asp-for="StudentNo" class="form-control" />
+                <span asp-validation-for="StudentNo" class="text-danger"></span>
+            </div>
+            <div class="mb-3  col-6">
+                <label asp-for="FullName">Student Name</label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="mb-3  col-6">
+                <label asp-for="ClassId">Class</label>
+                <select asp-for="ClassId" class="form-select" asp-items="@(new SelectList(ViewBag.Class,"ClassId","ClassName"))">
+                    <option disabled selected>-- Class --</option>
+                </select>
+                <span asp-validation-for="ClassId" class="text-danger"></span>
+            </div>
+            <div class="mb-3  col-6">
+                <label asp-for="Phone">Phone Number</label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="mb-3  col-6">
+                <label asp-for="ParentName">Parent Name</label>
+                <input asp-for="ParentName" class="form-control" />
+                <span asp-validation-for="ParentName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ParentPhone">Parent Phone</label>
+                <input asp-for="ParentPhone" class="form-control" />
+                <span asp-validation-for="ParentPhone" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary" style="width:150px">Save Record</button>
+                <a asp-controller="Student" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                    Back to Student
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
